@@ -1,4 +1,4 @@
-这一秒，了解上海发生了什么大事情 -- 上海权威媒体东方网(www.eastday.com)新闻爬虫，使用Mailgun的免费服务发送邮件提醒 
+这一秒，了解上海发生了什么大事情 -- 上海权威媒体东方网新闻爬虫，使用了Mailgun的免费服务发送邮件提醒 
 
 ![avata](/images/screenshot.jpg)
 
