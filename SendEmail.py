@@ -1,12 +1,16 @@
 import datetime
 import requests
 from lxml import etree
+import os.path
+import time
+import logging
 
-# 调用Mailgun发送HTML格式右键的函数
+# 调用Mailgun发送HTML格式的邮件
 # You can see a record of this email in your logs: https://app.mailgun.com/app/logs
 # You can send up to 300 emails/day from this sandbox server.
 # Next, you should add your own domain so you can send 10,000 emails/month for free.
 # 请替换你在Mailgun注册时获取的domain name和API key，以及注册的邮件地址
+
 def send_complex_message(subject, text):
     return requests.post(
         "https://api.mailgun.net/v3/<Your Domain>/messages",
@@ -18,11 +22,24 @@ def send_complex_message(subject, text):
               "text": "Testing some Mailgun awesomness!",
               "html": text})
 
-# 东方网新闻链接
-url = "http://www.eastday.com/eastday/shouye/node670813/n847507/20180704/index_T1722.html"
+# 获取东方网新闻链接，并访问
+mydate = datetime.datetime.now().strftime("%Y%m%d")
+url = "http://www.eastday.com/eastday/shouye/node670813/n847507/{0}/index_T1722.html".format(mydate)
 r = requests.get(url)
 text_to_send = ''
 
+# 设置logging
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+rq = time.strftime('%Y%m%d%H%M', time.localtime(time.time()))
+log_path = os.path.dirname(os.getcwd()) + '/GetThemAll/Logs/'
+log_name = log_path + rq + '.log'
+logfile = log_name
+fh = logging.FileHandler(logfile, mode='w')
+fh.setLevel(logging.DEBUG)
+formatter = logging.Formatter("%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s")
+fh.setFormatter(formatter)
+logger.addHandler(fh)
 
 try:
     r.raise_for_status()
@@ -33,7 +50,6 @@ try:
     list_of_images = []
     list_of_time = s.xpath('//p[@class="gray14"]/text()')
     list_of_body = s.xpath('//div[@class="cnt-inner"]/div/a/text()')
-
 
     total_num = len(list_of_time)
 
@@ -69,7 +85,7 @@ try:
     text_to_send += '</body></html>'
 
 except Exception as exc:
-    print('There was a problem: %s' % (exc))
+    logger.error('unable to connect. ', exc_info=True)
 
 
 subject = '直播上海 ' + ''.join(list_of_time[-1]) + ' --' + ''.join(list_of_time[0])[6:]  # 标题格式为：直播上海 年-月-日 起始时间 -- 结束时间 
