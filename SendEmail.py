@@ -5,12 +5,21 @@ from lxml import etree
 import os.path
 import time
 import logging
+<<<<<<< HEAD
 import sys
 
 # You can see a record of this email in your logs: https://app.mailgun.com/app/logs
 # You can send up to 300 emails/day from this sandbox server.
 # Next, you should add your own domain so you can send 10,000 emails/month for free.
 
+=======
+
+# 调用Mailgun发送HTML格式的邮件
+# You can see a record of this email in your logs: https://app.mailgun.com/app/logs
+# You can send up to 300 emails/day from this sandbox server.
+# Next, you should add your own domain so you can send 10,000 emails/month for free.
+# 请替换你在Mailgun注册时获取的domain name和API key，以及注册的邮件地址
+>>>>>>> 2a09e0195eaa268c9fdcf161a02b7900eb7e844c
 
 def send_complex_message(subject, text):
     return requests.post(
@@ -23,12 +32,20 @@ def send_complex_message(subject, text):
               "text": "Testing some Mailgun awesomness!",
               "html": text})
 
+<<<<<<< HEAD
+=======
+# 获取东方网新闻链接，并访问
+>>>>>>> 2a09e0195eaa268c9fdcf161a02b7900eb7e844c
 mydate = datetime.datetime.now().strftime("%Y%m%d")
 url = "http://www.eastday.com/eastday/shouye/node670813/n847507/{0}/index_T1722.html".format(mydate)
 r = requests.get(url)
 text_to_send = ''
 
+<<<<<<< HEAD
 # logging
+=======
+# 设置logging
+>>>>>>> 2a09e0195eaa268c9fdcf161a02b7900eb7e844c
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 rq = time.strftime('%Y%m%d%H%M', time.localtime(time.time()))
@@ -85,9 +102,14 @@ try:
 
     text_to_send += '</body></html>'
 
+<<<<<<< HEAD
     subject = '直播上海 ' + ''.join(list_of_time[-1]) + ' --' + ''.join(list_of_time[0])[6:]
     # send_simple_message(subject,text_to_send)
     send_complex_message(subject, text_to_send)
+=======
+except Exception as exc:
+    logger.error('unable to connect. ', exc_info=True)
+>>>>>>> 2a09e0195eaa268c9fdcf161a02b7900eb7e844c
 
 except Exception as exc:
     send_complex_message('东方网错误','unable to connect. {}'.format(exc))
