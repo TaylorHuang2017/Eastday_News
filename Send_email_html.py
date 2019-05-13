@@ -11,10 +11,10 @@ from email.mime.image import MIMEImage
 # 发邮件的函数
 def send_message_qq(title,content):
     mail_host = 'smtp.qq.com'  
-    mail_user = '2730891246@qq.com'  
-    mail_pass = 'wjfevevlekofdefb'   
-    sender = '2730891246@qq.com'  
-    receivers = ['tahuan@microsoft.com','taylorw@126.com']      
+    mail_user = 'sender address'  
+    mail_pass = 'password'   
+    sender = 'sender address'  
+    receivers = ['recipient 1','recipient 2']      
     message = MIMEMultipart()        
     message['Subject'] = title
     message['From'] = sender 
