@@ -4,13 +4,13 @@ from email.mime.text import MIMEText
 #163邮箱服务器地址
 mail_host = 'smtp.qq.com'  
 #163用户名
-mail_user = '2730891246@qq.com'  
+mail_user = 'username'  
 #密码 
-mail_pass = 'wjfevevlekofdefb'   
+mail_pass = 'password'   
 #邮件发送方邮箱地址
-sender = '2730891246@qq.com'  
+sender = 'sender address'  
 #邮件接受方邮箱地址，注意需要[]包裹，这意味着你可以写多个邮件地址群发
-receivers = ['tahuan@microsoft.com']  
+receivers = ['recipient']  
 
 #设置email信息
 #邮件内容设置
