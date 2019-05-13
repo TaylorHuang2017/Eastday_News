@@ -13,7 +13,7 @@ import sys
 def send_simple_message(subject, text):
     return requests.post(
         "https://api.mailgun.net/v3/sandboxbc5425db5f0e46be99aa28b2746769d1.mailgun.org/messages",
-        auth=("api", "a97454c453feb1d0f9bdba318381c3e7-47317c98-3ea1f3d8"),
+        auth=("api", "your api key"), //enter your API key
         data={"from": "Mailgun Sandbox <postmaster@sandboxbc5425db5f0e46be99aa28b2746769d1.mailgun.org>",
               "to": "tairan <2730891246@qq.com>",
               "subject": subject,
